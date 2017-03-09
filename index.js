@@ -110,9 +110,14 @@ function ExpiryModel(options) {
 
     function toJSON() {
         var hash = {}
-
+        var now = Date.now()
         store.forEach(function (record, key) {
-            hash[key] = record[0][1]
+            var ts = record[1]
+            if (ts > now - maxAge) {
+                hash[key] = record[0][1]
+            } else {
+                store.del(key)
+            }
         })
 
         return hash
