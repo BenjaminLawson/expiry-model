@@ -34,7 +34,7 @@ function ExpiryModel(options) {
         var source = value[2]
         var found = false
 
-        store.forEach(function (record) {
+        store.values().forEach(function (record) {
             if (record[2] === source && record[1] !== value[1]) {
                 found = true
             }
